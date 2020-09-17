@@ -1,3 +1,5 @@
+#!/usr/bin/env python
+
 #Neuron class
 #
 #This contains a bias, an alpha value, and a set of weights based on the number of nodes in the previous layer.
