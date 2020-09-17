@@ -2,9 +2,9 @@
 
 # Python 3.6
 
-#from . import Network
-#from . import Neuron
-#from . import Layer
+from network import Network
+from neuron import Neuron
+from layer import Layer
 
 import csv
 

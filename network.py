@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
-from . import Neuron
-from . import Layer
+from neuron import Neuron
+from layer import Layer
 
 class Network:
     
@@ -11,5 +11,5 @@ class Network:
         
     def __str__(self):
         # Define what the print() function should do when passed a Network object.
-        return "TODO"
+        return json.dumps(self.__dict__, separators=(',', ': '), sort_keys=True)
         
