@@ -9,7 +9,7 @@ class Neuron:
         self.alpha = 0
         self.bias = 0
         self.weights = []
-        for x in range(num_weights):
+        for i in range(num_weights):
             self.weights.append(0)
     
     def __str__(self):
