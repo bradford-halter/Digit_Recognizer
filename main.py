@@ -7,7 +7,9 @@ from neuron import Neuron
 from layer import Layer
 
 import csv
-
+ 
+# HELLO! I changed a file.
+ 
 def main():
     # Open the CSV file as read-only. Python will close it when the program exits.
     with open('train_small.csv', 'r') as csvfile: 
