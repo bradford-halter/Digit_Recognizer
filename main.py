@@ -32,6 +32,8 @@ def test_cross_prod_1():
         
     Output: All of these neurons should be exactly the same, 
     and the output should be 0.73.
+    
+    Note: To run this test, the weights in each Neuron (in neuron.py) must default to a value of 1.
     '''
     
     print("Started test_cross_prod_1()")

@@ -12,3 +12,6 @@ class Layer:
     
     def __str__(self):
         return jsonpickle.encode(self.__dict__, unpicklable=False)
+        
+    def __len__(self):
+        return len(self.neurons)
