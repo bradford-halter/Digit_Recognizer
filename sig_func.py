@@ -1,9 +1,9 @@
 #!/usr/bin/env python
 
-def sig_func(x):
+def sigmoid_function(x):
     return 1 / (1 + exp(-x))
 
-def cross_prod(active_neuron, prev_layer):
+def sig_func(active_neuron, prev_layer):
     ret_val = 0
     
     for i in range(len(prev_layer)):
