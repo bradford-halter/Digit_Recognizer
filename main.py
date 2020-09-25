@@ -13,7 +13,8 @@ import csv
 import jsonpickle
 
 def test_exp_1():
-    
+    print("test_exp_1()")
+    print(exp(1))
  
  
 def test_cross_prod_1():
@@ -65,6 +66,8 @@ def test_cross_prod_1():
     print("Print out the network:")
     print(my_network)
     
+    
+    test_exp_1()
     
     return "Test failed :)"
  
