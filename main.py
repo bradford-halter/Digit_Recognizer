@@ -6,10 +6,15 @@ from network import Network
 from neuron import Neuron
 from layer import Layer
 
-from propagation import propagation
+from propagation import *
+
 
 import csv
 import jsonpickle
+
+def test_exp_1():
+    
+ 
  
 def test_cross_prod_1():
     '''
@@ -39,16 +44,29 @@ def test_cross_prod_1():
     for i in range(len(input_layer.neurons)):
         input_layer.neurons[i].alpha = alpha_values_for_input_layer[i]
     
+    print()
+    print("Print the input_layer")
+    print(input_layer)
+    
     alpha_values_for_output_layer = propagation(my_network, input_layer)
     
+    classification_values = classify_propagation_output(my_network)
+    
+    
+    print()
     print("Output layer alpha values:")
     print(alpha_values_for_output_layer)
     
+    print()
+    print("Print out the classification values:")
+    print(classification_values)
+    
+    print()
     print("Print out the network:")
     print(my_network)
     
     
-    return "Test failed :("
+    return "Test failed :)"
  
 def main():
     # Open the CSV file as read-only. Python will close it when the program exits.

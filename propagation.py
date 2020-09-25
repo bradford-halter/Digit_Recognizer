@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+from sig_func import *
+
 def propagation(network, input_layer):
     for i in range(1,len(network.hidden_layers)):
         if i > 0:
@@ -15,8 +17,6 @@ def propagation(network, input_layer):
         alpha_values_for_output_layer.append(neuron.alpha)
     
     return(alpha_values_for_output_layer)
-    
-    return classify_propagation_output(network)
     
 def classify_propagation_output(network):
     confidence = -1
