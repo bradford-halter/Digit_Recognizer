@@ -2,6 +2,8 @@
 
 from layer import Layer
 
+# Modify network.py
+
 class Network:
     
     def __init__(self, num_hidden_layers, num_test_feat, num_neurons_per_layer, num_possible_outputs):
