@@ -5,14 +5,14 @@ from layer import Layer
 class Network:
     
     def __init__(self, num_hidden_layers, num_test_feat, num_neurons_per_layer, num_possible_outputs):
-        if num_hidden_layers > 0:
+        if num_hidden_layers > 1:
             self.output_layer = []
             self.output_layer.append(Layer(num_possible_outputs, num_neurons_per_layer))
             self.hidden_layers = []
             self.hidden_layers.append(Layer(num_neurons_per_layer,num_test_feat))
             for x in range(num_hidden_layers):
                 self.hidden_layers.append(Layer(num_neurons_per_layer,num_neurons_per_layer))
-        elif num_hidden_layers == 0:
+        elif num_hidden_layers == 1:
             self.output_layer = []
             self.output_layer.append(Layer(num_possible_outputs, num_test_feat))
         
