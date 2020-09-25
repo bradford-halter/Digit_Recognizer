@@ -2,7 +2,7 @@
 
 from layer import Layer
 
-# Modify network.py
+import jsonpickle
 
 class Network:
     
@@ -20,6 +20,5 @@ class Network:
             
         
     def __str__(self):
-        # Define what the print() function should do when passed a Network object.
-        return json.dumps(self.__dict__, separators=(',', ': '), sort_keys=True)
+        return jsonpickle.encode(self.__dict__, unpicklable=False)
         

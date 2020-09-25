@@ -2,6 +2,8 @@
 
 from neuron import Neuron
 
+import jsonpickle
+
 class Layer:
     def __init__(self, num_neurons, num_neurons_prev_layer):
         self.neurons = []
@@ -9,4 +11,4 @@ class Layer:
             self.neurons.append(Neuron(num_neurons_prev_layer))
     
     def __str__(self):
-        return json.dumps(self.__dict__, separators=(',', ': '), sort_keys=True)
+        return jsonpickle.encode(self.__dict__, unpicklable=False)
