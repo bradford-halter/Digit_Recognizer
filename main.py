@@ -69,7 +69,7 @@ def test_cross_prod_1():
     
     # All alpha values should be 0.73
     for alpha_val in alpha_values_for_output_layer:
-        if alpha_val != 0.73
+        if alpha_val != 0.73:
             return "Test failed :)"
     
     return "Test succeeded! Amazing!"
