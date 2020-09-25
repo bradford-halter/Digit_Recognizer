@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+#
+# Call sig_func for the correct value
 
 def sigmoid_function(x):
     return 1 / (1 + exp(-x))
