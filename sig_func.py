@@ -2,8 +2,10 @@
 #
 # Call sig_func for the correct value
 
+import math
+
 def sigmoid_function(x):
-    return 1 / (1 + exp(-x))
+    return 1 / (1 + math.exp(-x))
 
 def sig_func(active_neuron, prev_layer):
     ret_val = 0

@@ -8,14 +8,14 @@ from layer import Layer
 
 from propagation import *
 
+import math
 
 import csv
 import jsonpickle
 
 def test_exp_1():
     print("test_exp_1()")
-    print(exp(1))
- 
+    print(math.exp(1))
  
 def test_cross_prod_1():
     '''
@@ -31,7 +31,7 @@ def test_cross_prod_1():
     Weights: Set to 1 for all neurons.
         
     Output: All of these neurons should be exactly the same, 
-    and the output should be [TODO].
+    and the output should be 0.73.
     '''
     
     print("Started test_cross_prod_1()")
@@ -67,9 +67,13 @@ def test_cross_prod_1():
     print(my_network)
     
     
-    test_exp_1()
+    # All alpha values should be 0.73
+    for alpha_val in alpha_values_for_output_layer:
+        if alpha_val != 0.73
+            return "Test failed :)"
     
-    return "Test failed :)"
+    return "Test succeeded! Amazing!"
+    
  
 def main():
     # Open the CSV file as read-only. Python will close it when the program exits.
@@ -90,6 +94,7 @@ def main():
             break
             
         print(test_cross_prod_1())
+        test_exp_1()
             
         # Exit the program.
         print("Done.")
