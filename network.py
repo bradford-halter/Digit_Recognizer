@@ -10,10 +10,10 @@ class Network:
         if num_hidden_layers > 1:
             self.output_layer = []
             self.output_layer.append(Layer(num_possible_outputs, num_neurons_per_layer))
-            self.hidden_layers = []
-            self.hidden_layers.append(Layer(num_neurons_per_layer,num_test_feat))
-            for i in range(num_hidden_layers):
-                self.hidden_layers.append(Layer(num_neurons_per_layer,num_neurons_per_layer))
+            self.middle_layers = []
+            self.middle_layers.append(Layer(num_neurons_per_layer,num_test_feat))
+            for i in range(num_hidden_layers-1):
+                self.middle_layers.append(Layer(num_neurons_per_layer,num_neurons_per_layer))
         elif num_hidden_layers == 1:
             self.output_layer = []
             self.output_layer.append(Layer(num_possible_outputs, num_test_feat))
