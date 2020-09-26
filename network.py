@@ -3,6 +3,7 @@
 from layer import Layer
 
 import jsonpickle
+import json
 
 class Network:
     
@@ -20,5 +21,6 @@ class Network:
             
         
     def __str__(self):
-        return jsonpickle.encode(self.__dict__, unpicklable=False)
+        return json.dumps(json.loads(jsonpickle.encode(self.__dict__, unpicklable=False)), indent=4, sort_keys=True)
+        
         

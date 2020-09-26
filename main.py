@@ -9,9 +9,7 @@ from layer import Layer
 from propagation import *
 
 import math
-
 import csv
-import jsonpickle
 
 def test_exp_1():
     print("test_exp_1()")
