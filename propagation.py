@@ -3,7 +3,7 @@
 from sig_func import *
 
 def propagation(network, input_layer):
-    for i in range(1,len(network.hidden_layers)):
+    for i in range(0, len(network.hidden_layers)):
         if i > 0:
             for j in range(len(network.hidden_layers[i].neurons)):
                 network.hidden_layers[i].neurons[j].alpha = sig_func(network.hidden_layers[i].neurons[j], network.hidden_layers[i - 1])
