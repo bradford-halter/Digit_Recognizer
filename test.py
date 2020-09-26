@@ -9,12 +9,14 @@ from sig_func import *
 import jsonpickle
 
 def test1():
-    test_neuron = Neuron(2)
-    test_layer = Layer(2, 0)
+    test_neuron = Neuron(3)
+    test_layer = Layer(3, 0)
     test_layer.neurons[0].alpha = 0
     test_layer.neurons[1].alpha = 1
+    test_layer.neurons[2].alpha = 0
     test_neuron.weights[0] = 1
     test_neuron.weights[1] = 1
+    test_neuron.weights[2] = 1
     
     print("This should print out 0.73:")
     print(sig_func(test_neuron, test_layer))
