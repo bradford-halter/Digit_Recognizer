@@ -18,6 +18,9 @@ class Network:
             self.hidden_layers = []
             self.hidden_layers.append(Layer(num_possible_outputs, num_test_feat))
         
+        # We do not use this for calculation. When we call the propagation function,
+        # we store a copy of the input layer here, so that it may be printed out later.
+        self.last_input_layer_used = [] 
             
         
     def __str__(self):
