@@ -16,6 +16,7 @@ def test1():
     test_neuron.weights[0] = 1
     test_neuron.weights[1] = 1
     
+    print("This should print out 0.73:")
     print(sig_func(test_neuron, test_layer))
 
 def main():
