@@ -6,7 +6,7 @@ from neuron import Neuron
 
 from sig_func import *
 
-from json import *
+import jsonpickle
 
 def test1():
     test_neuron = Neuron(2)
