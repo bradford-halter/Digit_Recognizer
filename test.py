@@ -35,6 +35,18 @@ def test2():
     print("This should print out 2:")
     print(cost_func(test_output_alphas, test_desired_alphas))
     
+    test_output_alphas = [0, 1]
+    test_desired_alphas = [1, 0]
+    
+    print("This should print out 2:")
+    print(cost_func(test_output_alphas, test_desired_alphas))
+    
+    test_output_alphas = [0.5, 1]
+    test_desired_alphas = [1, 0]
+    
+    print("This should print out 1.25:")
+    print(cost_func(test_output_alphas, test_desired_alphas))
+    
 
 def main():
     print("Starting test.main:")
