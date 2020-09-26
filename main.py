@@ -40,7 +40,7 @@ def test_cross_prod_1():
     
     alpha_values_for_input_layer = [0.0, 0.25, 0.5, 0.25]
     
-    my_network = Network(1, 4, 3, 3)
+    my_network = Network(2, 4, 3, 3)
     
     # Create the input layer
     input_layer = Layer(4, 1)
@@ -71,7 +71,7 @@ def test_cross_prod_1():
     
     # All alpha values should be 0.73
     for alpha_val in alpha_values_for_output_layer:
-        if alpha_val != 0.73:
+        if abs(alpha_val - 0.73) > 0.01:
             return "Test failed :)"
     
     return "Test succeeded! Amazing!"
