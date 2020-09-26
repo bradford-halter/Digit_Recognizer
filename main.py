@@ -10,6 +10,7 @@ from propagation import *
 
 import math
 import csv
+import random
 
 def test_exp_1():
     print("test_exp_1()")
@@ -38,7 +39,7 @@ def test_cross_prod_1():
     
     alpha_values_for_input_layer = [0.0, 0.25, 0.5, 0.25]
     
-    my_network = Network(2, 4, 3, 3)
+    my_network = Network(3, 4, 3, 3)
     
     # Create the input layer
     input_layer = Layer(4, 1)
@@ -76,6 +77,9 @@ def test_cross_prod_1():
     
  
 def main():
+    # Set the random seed to 0, so that tests of the code will be repeatable.
+    random.seed(0)
+    
     # Open the CSV file as read-only. Python will close it when the program exits.
     with open('train_small.csv', 'r') as csvfile: 
 
