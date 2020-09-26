@@ -10,9 +10,9 @@ import jsonpickle
 
 def test1():
     test_neuron = Neuron(2)
-    test_layer = Layer(1, 2)
-    test_layer.neurons[0] = 0
-    test_layer.neurons[1] = 1
+    test_layer = Layer(2, 0)
+    test_layer.neurons[0].alpha = 0
+    test_layer.neurons[1].alpha = 1
     test_neuron.weights[0] = 1
     test_neuron.weights[1] = 1
     
