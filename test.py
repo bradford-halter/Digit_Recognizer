@@ -20,4 +20,5 @@ def test1():
     print(sig_func(test_neuron, test_layer))
 
 def main():
+    print("Starting test.main:")
     test1()
