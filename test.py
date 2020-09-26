@@ -22,3 +22,7 @@ def test1():
 def main():
     print("Starting test.main:")
     test1()
+
+# Call the main() function when the program is started from command line.
+if __name__ == "__main__":
+    main()
