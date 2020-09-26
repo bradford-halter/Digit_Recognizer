@@ -5,6 +5,7 @@ from layer import Layer
 from neuron import Neuron
 
 from sig_func import *
+from cost_func import *
 
 import jsonpickle
 
@@ -20,10 +21,18 @@ def test1():
     
     print("This should print out 0.73:")
     print(sig_func(test_neuron, test_layer))
+    
+def test2():
+    test_output_alphas = [0, 0]
+    test_desired_alphas = [1, 0]
+    
+    print("This should print out 1:")
+    print(cost_func(test_output_alphas, test_desired_alphas))
+    
 
 def main():
     print("Starting test.main:")
-    test1()
+    test2()
 
 # Call the main() function when the program is started from command line.
 if __name__ == "__main__":
