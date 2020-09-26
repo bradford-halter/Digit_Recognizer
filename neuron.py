@@ -8,11 +8,11 @@ import jsonpickle
 
 class Neuron:
     def __init__(self, num_weights):
-        self.alpha = 0
-        self.bias = 0
+        self.alpha = random.random()
+        self.bias = random.random()
         self.weights = []
         for i in range(num_weights):
-            self.weights.append(1)
+            self.weights.append(random.random())
     
     def __str__(self):
         return jsonpickle.encode(self.__dict__, unpicklable=False)
