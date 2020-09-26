@@ -6,7 +6,7 @@ from neuron import Neuron
 
 from sig_func import *
 
-import json.*
+from json import *
 
 def test1():
     test_neuron = Neuron(2)
