@@ -4,6 +4,7 @@
 #
 #This contains a bias, an alpha value, and a set of weights based on the number of nodes in the previous layer.
 
+import random
 import jsonpickle
 
 class Neuron:
