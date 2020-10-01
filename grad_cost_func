@@ -1,0 +1,6 @@
+#!/usr/bin/env python
+
+
+
+def grad_cost_func(active_neuron, prev_layer):
+    #todo
