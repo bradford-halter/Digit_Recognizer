@@ -4,13 +4,15 @@ from sig_func import *
 
 def propagation(network, input_layer):
     network.last_input_layer_used = input_layer # store a copy of the input layer, to be printed out layer
-    for i in range(0, len(network.hidden_layers)):
+    for i in range(len(network.hidden_layers)):
         if i > 0:
             for j in range(len(network.hidden_layers[i].neurons)):
-                network.hidden_layers[i].neurons[j].alpha = sig_func(network.hidden_layers[i].neurons[j], network.hidden_layers[i - 1])
+                cur_neuron = network.hidden_layers[i].neurons[j]
+                cur_neuron.z, cur_neuron.alpha = sig_func(network.hidden_layers[i].neurons[j], network.hidden_layers[i - 1])
         else:
             for j in range(len(network.hidden_layers[i].neurons)):
-                network.hidden_layers[i].neurons[j].alpha = sig_func(network.hidden_layers[i].neurons[j], input_layer)
+                cur_neuron = network.hidden_layers[i].neurons[j]
+                cur_neuron.z, cur_neuron.alpha = sig_func(network.hidden_layers[i].neurons[j], input_layer)
     
     print("propagation(): right before the end")
     alpha_values_for_output_layer = []

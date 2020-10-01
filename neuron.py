@@ -9,6 +9,7 @@ import jsonpickle
 
 class Neuron:
     def __init__(self, num_weights):
+        self.z = None
         self.alpha = random.random()
         self.bias = random.random()
         self.weights = []
