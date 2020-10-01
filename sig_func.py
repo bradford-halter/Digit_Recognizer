@@ -13,7 +13,9 @@ def sig_func(active_neuron, prev_layer):
     for i in range(len(prev_layer.neurons)):
         ret_val1 += active_neuron.weights[i] * prev_layer.neurons[i].alpha
         
-    ret_val2 = sigmoid_function(ret_val1 + active_neuron.bias)
+    ret_val1 = ret_val1 + active_neuron.bias
+    
+    ret_val2 = sigmoid_function(ret_val1)
     
     return [ret_val1, ret_val2]
     
