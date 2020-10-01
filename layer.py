@@ -10,6 +10,9 @@ class Layer:
         for i in range(num_neurons):
             self.neurons.append(Neuron(num_neurons_prev_layer))
     
+    def backpropogate(self):
+        print("backpropogate: It's still TODO boi!")
+    
     def __str__(self):
         return jsonpickle.encode(self.__dict__, unpicklable=False)
         
