@@ -12,4 +12,4 @@ def cost_func(output_layer_alphas, desired_alphas):
         ret_val_norm += ((output_layer_alphas[i] - desired_alphas[i]) ** 2)
         ret_val_array[i].append((output_layer_alphas[i] - desired_alphas[i]) ** 2)
         
-    return [ret_val_norm ret_val_array ret_val]
+    return [ret_val_norm, ret_val_array, ret_val]
