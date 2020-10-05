@@ -1,7 +1,5 @@
 #!/usr/bin/env python
 
-from layer import Layer
-from neuron import Neuron
 from sig_func import *
 
 def back_propagation(current_layer, previous_layer, cost_mat):
