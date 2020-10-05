@@ -14,7 +14,7 @@ def back_propagation(current_layer, previous_layer, cost_mat):
     new_bias = []
     new_cost = []
 
-#Calculates new weights and bias
+    #Calculates new weights and bias
 
     for i in range(len(current_layer.neurons)):
         new_del_z_w = 0
@@ -35,7 +35,7 @@ def back_propagation(current_layer, previous_layer, cost_mat):
         for j in range(len(new_weights)):
             new_del_z_a += new_weights[j]
 
-# Update weights and bias in current layer
+    # Update weights and bias in current layer
 
     for i in range(len(current_layer.neurons)):
         for j in range(len(current_layer.neurons[i].weights)):
@@ -43,7 +43,7 @@ def back_propagation(current_layer, previous_layer, cost_mat):
         
         current_layer.neurons[i].bias += new_bias[i]
     
-# Create a new cost_mat
+    # Create a new cost_mat
 
     for i in range(len(previous_layer.neurons)):
         cost_sum = 0
