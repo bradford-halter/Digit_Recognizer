@@ -251,7 +251,41 @@ def test_cost_function_1_layers():
     print("The cost function looks accurate. Done for now.")
     
     
+# Evaluate the network on the input, and get the outputs.
+def test_back_propagation_1_layers_evaluate(examples_as_input_layers,
+                                           single_weight_and_bias, 
+                                           expected_outputs_of_network):
 
+    # Evaluate the networks on the inputs.
+    outputs_of_network = []
+    for input_layer in examples_as_input_layers:
+        output_vector = propagation(single_weight_and_bias, input_layer)
+        outputs_of_network.append(output_vector[0])
+    
+    # Calculate cost function.
+    # We have a weird case where our inputs and outputs are both just scalars, so we need to put each one into a list first.
+    output_layer_alphas = [ [x] for x in outputs_of_network ]
+    desired_alphas =      [ [x] for x in expected_outputs_of_network ]
+    
+    the_costs = []
+    for i in range(len(output_layer_alphas)):
+        the_costs.append(cost_func(output_layer_alphas[i], desired_alphas[i]))
+    # Now we have a list of the cost function output for each example.
+    
+    #print("Cost values for 1st time we ran the network: ")
+    #for some_confusing_list in the_costs:
+    #    print(some_confusing_list)
+    #print()
+    
+    # We need to takes the THIRD value from the_costs, and hand it off to backpropogation.
+    # Each element of this list is a cost_mat to pass to backprop for 1 example.
+    ret_val_norm_array = [c for a, b, c in the_costs]
+    #print("ret_val_norm_array: ")
+    #print(ret_val_norm_array)
+    #print()
+    
+    return ret_val_norm_array
+    
     
 def test_back_propagation_1_layers():
     print("test_back_propagation_1_layers()")
@@ -286,34 +320,10 @@ def test_back_propagation_1_layers():
     # ^ Done setting up the network.
     #--------------------------------------------
     
-    
-    # Evaluate the networks on the inputs.
-    outputs_of_network = []
-    for input_layer in examples_as_input_layers:
-        output_vector = propagation(single_weight_and_bias, input_layer)
-        outputs_of_network.append(output_vector[0])
-    
-    # Calculate cost function.
-    # We have a weird case where our inputs and outputs are both just scalars, so we need to put each one into a list first.
-    output_layer_alphas = [ [x] for x in outputs_of_network ]
-    desired_alphas =      [ [x] for x in expected_outputs_of_network ]
-    
-    the_costs = []
-    for i in range(len(output_layer_alphas)):
-        the_costs.append(cost_func(output_layer_alphas[i], desired_alphas[i]))
-    # Now we have a list of the cost function output for each example.
-    
-    print("Cost values for 1st time we ran the network: ")
-    for some_confusing_list in the_costs:
-        print(some_confusing_list)
-    print()
-    
-    # We need to takes the THIRD value from the_costs, and hand it off to backpropogation.
-    # Each element of this list is a cost_mat to pass to backprop for 1 example.
-    ret_val_norm_array = [c for a, b, c in the_costs]
-    print("ret_val_norm_array: ")
-    print(ret_val_norm_array)
-    print()
+    # Evaluate the network on the input, and get the outputs.
+    test_back_propagation_1_layers_evaluate(examples_as_input_layers, 
+                                        single_weight_and_bias, 
+                                        expected_outputs_of_network):
     
     # Run back propagation once for each (input, expected_output) example.
     # We're not batching. Each time we call back_propagation(), 
