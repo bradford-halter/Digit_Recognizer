@@ -35,9 +35,9 @@ def back_propagation(current_layer, previous_layer, cost_mat):
     # Update weights and bias in current layer
     for i in range(len(current_layer.neurons)):
         for j in range(len(current_layer.neurons[i].weights)):
-            current_layer.neurons[i].weights[j] += new_weights[i]
+            current_layer.neurons[i].weights[j] -= new_weights[i]
         
-        current_layer.neurons[i].bias += new_bias[i]
+        current_layer.neurons[i].bias -= new_bias[i]
     
     # Create a new cost_mat
     for i in range(len(previous_layer.neurons)):

@@ -250,6 +250,9 @@ def test_cost_function_1_layers():
     
     print("The cost function looks accurate. Done for now.")
     
+    
+
+    
 def test_back_propagation_1_layers():
     print("test_back_propagation_1_layers()")
     
@@ -315,17 +318,37 @@ def test_back_propagation_1_layers():
     # Run back propagation once for each (input, expected_output) example.
     # We're not batching. Each time we call back_propagation(), 
     # it's doing backprop using 1 training example.
-    for i in range(len(examples_as_input_layers)):
-        back_propagation(single_weight_and_bias.hidden_layers[0], 
-                         examples_as_input_layers[i], 
-                         ret_val_norm_array[i])
+    the_costs_2nd_time = []
     
-    # Evalute the network on the inputs a 2nd time, and see difference in output.
+    for backprop_iterations in range(2):
+        
+    # Calculate cost function.
+    # We have a weird case where our inputs and outputs are both just scalars, so we need to put each one into a list first.
+    output_layer_alphas = [ [x] for x in outputs_of_network ]
+    desired_alphas =      [ [x] for x in expected_outputs_of_network ]
+    
+    the_costs = []
+    for i in range(len(output_layer_alphas)):
+        the_costs.append(cost_func(output_layer_alphas[i], desired_alphas[i]))
+        
+        for i in range(len(examples_as_input_layers)):
+            back_propagation(single_weight_and_bias.hidden_layers[0], 
+                             examples_as_input_layers[i], 
+                             ret_val_norm_array[i])
+    
+    # Evaluate the network on the inputs a 2nd time, and see difference in output.
     # Evaluate the networks on the inputs.
     outputs_of_network_2nd_time = []
     for input_layer in examples_as_input_layers:
         output_vector = propagation(single_weight_and_bias, input_layer)
         outputs_of_network_2nd_time.append(output_vector[0])
+    
+    
+    # Calculate the cost a 2nd time, after backprop.
+    output_layer_alphas_2nd_time = [ [x] for x in outputs_of_network_2nd_time ]
+    desired_alphas =               [ [x] for x in expected_outputs_of_network ]
+    
+
     
     print("Evalute the network on the inputs a 2nd time, and see difference in output after backprop.")
     plt.plot(inputs_of_network, outputs_of_network,          'o', color='red');
