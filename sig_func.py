@@ -4,6 +4,15 @@
 
 import math
 
+# Takes in a list
+# Returns a list where all the value are in the range [0, 1].
+def normalize(ll):
+    my_min = min(ll)
+    my_max = max(ll)
+    
+    my_range = my_max - my_min
+    outputs = [x/my_min + ]
+
 def sigmoid_function(x):
     return 1 / (1 + math.exp(-x))
 

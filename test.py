@@ -138,6 +138,9 @@ def test_forward_propagation_1_layers():
     # Set up an input layer for each example.
     examples_as_input_layers = [Layer(1, 1) for item in examples]
     
+    inputs_of_network = [in_out_pair[0] for in_out_pair in examples]
+    expected_outputs_of_network = normalize(inputs_of_network)
+    
     #print("Print out the un-initiaized input layers that we will run evaluate the network on.")
     #for example_input_layer in examples_as_input_layers:
     #    print(example_input_layer)
@@ -153,8 +156,6 @@ def test_forward_propagation_1_layers():
     for input_layer in examples_as_input_layers:
         output_vector = propagation(single_weight_and_bias, input_layer)
         outputs_of_network.append(output_vector[0])
-        
-    inputs_of_network = [in_out_pair[0] for in_out_pair in examples]
     
     print("These were the inputs: ")
     print(inputs_of_network)
