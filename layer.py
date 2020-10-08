@@ -3,7 +3,6 @@
 from neuron import Neuron
 
 import jsonpickle
-from functools import map
 
 class Layer:
     def __init__(self, num_neurons, num_neurons_prev_layer):

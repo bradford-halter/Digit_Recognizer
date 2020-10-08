@@ -12,6 +12,8 @@ import math
 import csv
 import random
 import jsonpickle
+#import matplotlib
+import matplotlib.pyplot as plt
 
 def test1():
     test_neuron = Neuron(3)
@@ -125,14 +127,71 @@ def test_cross_prod_1():
     print("Test succeeded! Amazing!")
     return
 
+def test_back_propagation_1_layers():
+    print("test_back_propagation_1_layers()")
+    # Put in some examples where each example has the same output as input.
+    # Train the neural network. The single weight should end up near 1 (?) and the bias near 0.
+    # If the neural network ends up outputting a function like f(x) = x, then we're good.
+    single_weight_and_bias = Network(1, 1, 1, 1)
+    examples = [(x, x) for x in range(-10, 11)] # -10 to 10 (inclusive).
+    
+    # Set up an input layer for each example.
+    examples_as_input_layers = [Layer(1, 1) for item in examples]
+    
+    #print("Print out the un-initiaized input layers that we will run evaluate the network on.")
+    #for example_input_layer in examples_as_input_layers:
+    #    print(example_input_layer)
+    
+    for i in range(len(examples)):
+        # Set the "alpha" for the single neuron in each of the input layers 
+        # to be equal to the example's input.
+        # Sorry that is confusing. We are just setting up the inputs.
+        examples_as_input_layers[i].alpha = examples[i][0] 
+    
+    outputs_of_network = []
+    
+    for input_layer in examples_as_input_layers:
+        output_vector = propagation(single_weight_and_bias, input_layer)
+        outputs_of_network.append(output_vector[0])
+        
+    inputs_of_network = [in_out_pair[0] for in_out_pair in examples]
+    
+    print("These were the inputs: ")
+    print(inputs_of_network)
+    print()
+    
+    print("These were the outputs: ")
+    print(["{:.2f}".format(output) for output in outputs_of_network])
+    print()
+    
+    print("Let's print out the Network and see what happens.")
+    print(single_weight_and_bias)
+    print()
+    
+    print("Let's try to the output of our neural network before training, " \
+           + "when evaluated on each input.")
+    #plt.plot(inputs_of_network, outputs_of_network, 'o', color='black');
+    #plt.show()
+        
+    print("OK some progress!")
+
+def test_matplotlib_plot():
+    x = [i for i in range(-10, 11)]
+    y = [i for i in range(-10, 11)]
+    plt.plot(x, y, 'o', color='black');
+    plt.show()
+    print("Booyah it printed.")
+
 def main():
     # Set the random seed to 0 so tests will be repeatable.
     random.seed(0)
     
     print("Starting test.main:")
     #test1()
-    test2()
+    #test2()
     #test_cross_prod_1()
+    test_back_propagation_1_layers()
+    #test_matplotlib_plot()
 
 # Call the main() function when the program is started from command line.
 if __name__ == "__main__":
