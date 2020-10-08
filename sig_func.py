@@ -11,6 +11,9 @@ def normalize(ll):
     my_max = max(ll)
     
     my_range = my_max - my_min
+    
+    #you want to minus the minimum value from everything in the set and then divide everything by the range
+    
     outputs = [x/my_min + ]
 
 def sigmoid_function(x):
