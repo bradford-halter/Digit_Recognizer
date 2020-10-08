@@ -171,10 +171,154 @@ def test_forward_propagation_1_layers():
     
     print("Let's try to the output of our neural network before training, " \
            + "when evaluated on each input.")
-    plt.plot(inputs_of_network, outputs_of_network, 'o', color='black');
+    plt.plot(inputs_of_network, outputs_of_network, 'o', color='red');
+    plt.plot(inputs_of_network, expected_outputs_of_network, 'o', color='blue');
     plt.show()
         
     print("OK some progress!")
+
+def test_cost_function_1_layers():
+    print("test_cost_function_1_layers()")
+    
+    #--------------------------------------------
+    # Just set up a network with 1 input 1 output
+    #--------------------------------------------
+    
+    # Put in some examples where each example has the same output as input.
+    # Train the neural network. The single weight should end up near 1 (?) and the bias near 0.
+    # If the neural network ends up outputting a function like f(x) = x, then we're good.
+    single_weight_and_bias = Network(1, 1, 1, 1)
+    examples = [(x, x) for x in range(-10, 11)] # -10 to 10 (inclusive).
+    
+    # Set up an input layer for each example.
+    examples_as_input_layers = [Layer(1, 1) for item in examples]
+    
+    inputs_of_network = [in_out_pair[0] for in_out_pair in examples]
+    expected_outputs_of_network = normalize(inputs_of_network)
+    
+    #print("Print out the un-initiaized input layers that we will run evaluate the network on.")
+    #for example_input_layer in examples_as_input_layers:
+    #    print(example_input_layer)
+    
+    for i in range(len(examples)):
+        # Set the "alpha" for the single neuron in each of the input layers 
+        # to be equal to the example's input.
+        # Sorry that is confusing. We are just setting up the inputs.
+        examples_as_input_layers[i].neurons[0].alpha = examples[i][0] 
+
+    #--------------------------------------------
+    # ^ Done setting up the network.
+    #--------------------------------------------
+    
+    
+    # Evaluate the networks on the inputs.
+    outputs_of_network = []
+    for input_layer in examples_as_input_layers:
+        output_vector = propagation(single_weight_and_bias, input_layer)
+        outputs_of_network.append(output_vector[0])
+    
+    # Calculate cost function.
+    # We have a weird case where our inputs and outputs are both just scalars, so we need to put each one into a list first.
+    output_layer_alphas = [ [x] for x in outputs_of_network ]
+    desired_alphas =      [ [x] for x in expected_outputs_of_network ]
+    
+    the_costs = []
+    for i in range(len(output_layer_alphas)):
+        the_costs.append(cost_func(output_layer_alphas[i], desired_alphas[i]))
+    # Now we have a list of the cost function output for each example.
+    
+    print("Cost values for 1st time we ran the network: ")
+    for some_confusing_list in the_costs:
+        print(some_confusing_list)
+    print()
+    
+    # We need to takes the THIRD value from the_costs, and hand it off to backpropogation.
+    ret_val_norm_array = [c for a, b, c in the_costs]
+    print("ret_val_norm_array: ")
+    print(ret_val_norm_array)
+    print()
+    
+    costs_to_plot = [x[0] for x in ret_val_norm_array]
+    
+    # Now that we have the cost function values to hand off, lets sanity check them by plotting them.
+    plt.plot(inputs_of_network, outputs_of_network,          'o', color='red');
+    plt.plot(inputs_of_network, expected_outputs_of_network, 'o', color='blue');
+    plt.plot(inputs_of_network, costs_to_plot,               'o', color='green');
+    plt.show()
+    
+    print("The cost function looks accurate. Done for now.")
+    
+def test_back_propagation_1_layers():
+    print("test_back_propagation_1_layers()")
+    
+    #--------------------------------------------
+    # Just set up a network with 1 input 1 output
+    #--------------------------------------------
+    
+    # Put in some examples where each example has the same output as input.
+    # Train the neural network. The single weight should end up near 1 (?) and the bias near 0.
+    # If the neural network ends up outputting a function like f(x) = x, then we're good.
+    single_weight_and_bias = Network(1, 1, 1, 1)
+    examples = [(x, x) for x in range(-10, 11)] # -10 to 10 (inclusive).
+    
+    # Set up an input layer for each example.
+    examples_as_input_layers = [Layer(1, 1) for item in examples]
+    
+    inputs_of_network = [in_out_pair[0] for in_out_pair in examples]
+    expected_outputs_of_network = normalize(inputs_of_network)
+    
+    #print("Print out the un-initiaized input layers that we will run evaluate the network on.")
+    #for example_input_layer in examples_as_input_layers:
+    #    print(example_input_layer)
+    
+    for i in range(len(examples)):
+        # Set the "alpha" for the single neuron in each of the input layers 
+        # to be equal to the example's input.
+        # Sorry that is confusing. We are just setting up the inputs.
+        examples_as_input_layers[i].neurons[0].alpha = examples[i][0] 
+
+    #--------------------------------------------
+    # ^ Done setting up the network.
+    #--------------------------------------------
+    
+    
+    # Evaluate the networks on the inputs.
+    outputs_of_network = []
+    for input_layer in examples_as_input_layers:
+        output_vector = propagation(single_weight_and_bias, input_layer)
+        outputs_of_network.append(output_vector[0])
+    
+    # Calculate cost function.
+    # We have a weird case where our inputs and outputs are both just scalars, so we need to put each one into a list first.
+    output_layer_alphas = [ [x] for x in outputs_of_network ]
+    desired_alphas =      [ [x] for x in expected_outputs_of_network ]
+    
+    the_costs = []
+    for i in range(len(output_layer_alphas)):
+        the_costs.append(cost_func(output_layer_alphas[i], desired_alphas[i]))
+    # Now we have a list of the cost function output for each example.
+    
+    print("Cost values for 1st time we ran the network: ")
+    for some_confusing_list in the_costs:
+        print(some_confusing_list)
+    print()
+    
+    # We need to takes the THIRD value from the_costs, and hand it off to backpropogation.
+    ret_val_norm_array = [c for a, b, c in the_costs]
+    print("ret_val_norm_array: ")
+    print(ret_val_norm_array)
+    print()
+    
+    
+
+def test_normalize():
+    print("test_normalize()")
+    x = [i * 1000 for i in range(-5, 6)]
+    print("in:  ", end="")
+    print(x)
+    y = normalize(x)
+    print("out: ", end="")
+    print(y)
 
 def test_matplotlib_plot():
     x = [i for i in range(-10, 11)]
@@ -191,8 +335,11 @@ def main():
     #test1()
     #test2()
     #test_cross_prod_1()
-    test_forward_propagation_1_layers()
+    #test_forward_propagation_1_layers()
+    #test_cost_function_1_layers()
+    test_back_propagation_1_layers()
     #test_matplotlib_plot()
+    #test_normalize()
 
 # Call the main() function when the program is started from command line.
 if __name__ == "__main__":
