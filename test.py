@@ -345,12 +345,19 @@ def test_back_propagation_1_layers():
     
     
     print("Evalute the network on the inputs a 2nd time, and see difference in output after backprop.")
+    print("1st overall cost: ", end="")
+    print(sum(costs_to_plot))
+    print("2nd overall cost: ", end="")
+    print(sum(costs_to_plot_2nd_time))
+    
     plt.plot(inputs_of_network, outputs_of_network,          'o', color='red');
     plt.plot(inputs_of_network, expected_outputs_of_network, 'o', color='blue');
     plt.plot(inputs_of_network, outputs_of_network_2nd_time, 'o', color='purple');
     plt.plot(inputs_of_network, costs_to_plot,          'o', color='green');
     plt.plot(inputs_of_network, costs_to_plot_2nd_time, 'o', color='yellow');
     plt.show()
+    
+
     
     print("Done.")
 
