@@ -19,7 +19,7 @@ def normalize(ll):
 def sigmoid_function(x):
     return 1 / (1 + math.exp(-x))
 
-def sig_func(active_neuron, prev_layer):
+def z_function(active_neuron, prev_layer):
     ret_val1 = 0
     
     for i in range(len(prev_layer.neurons)):
@@ -27,7 +27,13 @@ def sig_func(active_neuron, prev_layer):
         
     ret_val1 = ret_val1 + active_neuron.bias
     
+    return ret_val1
+
+def sig_func(active_neuron, prev_layer):
+
+    ret_val1 = z_function(active_neuron, prev_layer)
+    
     ret_val2 = sigmoid_function(ret_val1)
     
-    return [ret_val1, ret_val2]
+    return ret_val2
     

@@ -7,6 +7,8 @@ from neuron import Neuron
 from sig_func import *
 from cost_func import *
 from propagation import *
+from back_propagation import *
+
 
 import math
 import csv
@@ -304,12 +306,34 @@ def test_back_propagation_1_layers():
     print()
     
     # We need to takes the THIRD value from the_costs, and hand it off to backpropogation.
+    # Each element of this list is a cost_mat to pass to backprop for 1 example.
     ret_val_norm_array = [c for a, b, c in the_costs]
     print("ret_val_norm_array: ")
     print(ret_val_norm_array)
     print()
     
+    # Run back propagation once for each (input, expected_output) example.
+    # We're not batching. Each time we call back_propagation(), 
+    # it's doing backprop using 1 training example.
+    for i in range(len(examples_as_input_layers)):
+        back_propagation(single_weight_and_bias.hidden_layers[0], 
+                         examples_as_input_layers[i], 
+                         ret_val_norm_array[i])
     
+    # Evalute the network on the inputs a 2nd time, and see difference in output.
+    # Evaluate the networks on the inputs.
+    outputs_of_network_2nd_time = []
+    for input_layer in examples_as_input_layers:
+        output_vector = propagation(single_weight_and_bias, input_layer)
+        outputs_of_network_2nd_time.append(output_vector[0])
+    
+    print("Evalute the network on the inputs a 2nd time, and see difference in output after backprop.")
+    plt.plot(inputs_of_network, outputs_of_network,          'o', color='red');
+    plt.plot(inputs_of_network, expected_outputs_of_network, 'o', color='blue');
+    plt.plot(inputs_of_network, outputs_of_network_2nd_time, 'o', color='purple');
+    plt.show()
+    
+    print("Done.")
 
 def test_normalize():
     print("test_normalize()")
