@@ -127,8 +127,8 @@ def test_cross_prod_1():
     print("Test succeeded! Amazing!")
     return
 
-def test_back_propagation_1_layers():
-    print("test_back_propagation_1_layers()")
+def test_forward_propagation_1_layers():
+    print("test_forward_propagation_1_layers()")
     # Put in some examples where each example has the same output as input.
     # Train the neural network. The single weight should end up near 1 (?) and the bias near 0.
     # If the neural network ends up outputting a function like f(x) = x, then we're good.
@@ -146,7 +146,7 @@ def test_back_propagation_1_layers():
         # Set the "alpha" for the single neuron in each of the input layers 
         # to be equal to the example's input.
         # Sorry that is confusing. We are just setting up the inputs.
-        examples_as_input_layers[i].alpha = examples[i][0] 
+        examples_as_input_layers[i].neurons[0].alpha = examples[i][0] 
     
     outputs_of_network = []
     
@@ -170,8 +170,8 @@ def test_back_propagation_1_layers():
     
     print("Let's try to the output of our neural network before training, " \
            + "when evaluated on each input.")
-    #plt.plot(inputs_of_network, outputs_of_network, 'o', color='black');
-    #plt.show()
+    plt.plot(inputs_of_network, outputs_of_network, 'o', color='black');
+    plt.show()
         
     print("OK some progress!")
 
@@ -190,7 +190,7 @@ def main():
     #test1()
     #test2()
     #test_cross_prod_1()
-    test_back_propagation_1_layers()
+    test_forward_propagation_1_layers()
     #test_matplotlib_plot()
 
 # Call the main() function when the program is started from command line.
