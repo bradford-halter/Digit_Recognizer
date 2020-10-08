@@ -52,5 +52,7 @@ def back_propagation(current_layer, previous_layer, cost_mat):
             
         new_cost.append(cost_sum)
     
+    print("BACKpropagation(): right before the end")
+    
     return new_cost
         
