@@ -320,41 +320,58 @@ def test_back_propagation_1_layers():
     # ^ Done setting up the network.
     #--------------------------------------------
     
-    # Evaluate the network on the input, and get the outputs and costs.
-    outputs_of_network, ret_val_norm_array =  \
-    test_back_propagation_1_layers_evaluate(examples_as_input_layers, 
-                                        single_weight_and_bias, 
-                                        expected_outputs_of_network)
+    costs_per_evaluation = []
+    outputs_of_network_per_evaluation = []
+
     
     # Run back propagation once for each (input, expected_output) example.
     # We're not batching. Each time we call back_propagation(), 
     # it's doing backprop using 1 training example.
-    for i in range(len(examples_as_input_layers)):
-        back_propagation(single_weight_and_bias.hidden_layers[0], 
-                         examples_as_input_layers[i], 
-                         ret_val_norm_array[i])
+    for cur_num_evaluation in range(80):
     
-    # Evaluate the network on the inputs a 2nd time, and see difference in output and costs.
-    outputs_of_network_2nd_time, ret_val_norm_array_2nd_time =  \
+        # Evaluate the network on the input, and get the outputs and costs.
+        outputs_of_network, ret_val_norm_array =  \
+        test_back_propagation_1_layers_evaluate(examples_as_input_layers, 
+                                            single_weight_and_bias, 
+                                            expected_outputs_of_network)
+        # Store the outputs and costs that we just calculated by running the network.
+        outputs_of_network_per_evaluation.append(outputs_of_network)
+        costs_per_evaluation.append(ret_val_norm_array)
+    
+        # Do backprop across all (input, output) examples 1 time.
+        for i in range(len(examples_as_input_layers)):
+            back_propagation(single_weight_and_bias.hidden_layers[0], 
+                             examples_as_input_layers[i], 
+                             costs_per_evaluation[cur_num_evaluation][i])
+    
+    
+    #--------------------------------------------
+    # ^ Done with backprop. Now print results.
+    #--------------------------------------------
+    
+    # Evaluate the network on the inputs a final time, and see difference in output and costs.
+    outputs_of_network_final_time, ret_val_norm_array_final_time =  \
     test_back_propagation_1_layers_evaluate(examples_as_input_layers, 
                                         single_weight_and_bias, 
                                         expected_outputs_of_network)
 
-    costs_to_plot           = [x[0] for x in ret_val_norm_array]
-    costs_to_plot_2nd_time  = [x[0] for x in ret_val_norm_array_2nd_time]
+    costs_to_plot             = [x[0] for x in costs_per_evaluation[0]]
+    costs_to_plot_final_time  = [x[0] for x in ret_val_norm_array_final_time]
     
     
-    print("Evalute the network on the inputs a 2nd time, and see difference in output after backprop.")
+    print("Evalute the network on the inputs a final time, and see difference in output after backprop.")
     print("1st overall cost: ", end="")
     print(sum(costs_to_plot))
     print("2nd overall cost: ", end="")
-    print(sum(costs_to_plot_2nd_time))
+    print(sum(costs_to_plot_final_time))
     
-    plt.plot(inputs_of_network, outputs_of_network,          'o', color='red');
-    plt.plot(inputs_of_network, expected_outputs_of_network, 'o', color='blue');
-    plt.plot(inputs_of_network, outputs_of_network_2nd_time, 'o', color='purple');
-    plt.plot(inputs_of_network, costs_to_plot,          'o', color='green');
-    plt.plot(inputs_of_network, costs_to_plot_2nd_time, 'o', color='yellow');
+    original_output_of_network = outputs_of_network_per_evaluation[0]
+    
+    plt.plot(inputs_of_network, original_output_of_network,     'o', color='red');
+    plt.plot(inputs_of_network, expected_outputs_of_network,    'o', color='blue');
+    plt.plot(inputs_of_network, outputs_of_network_final_time,  'o', color='purple');
+    plt.plot(inputs_of_network, costs_to_plot,              'o', color='green');
+    plt.plot(inputs_of_network, costs_to_plot_final_time,   'o', color='yellow');
     plt.show()
     
 
