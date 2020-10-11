@@ -433,25 +433,26 @@ def simple_mnist_test_1():
     example_inputs  = []
     example_outputs = []
     
-    cur_inputs_str = single_training_example[2:]
+    cur_inputs_str = single_training_example[1:]
     cur_inputs_int = normalize([ int(x) for x in cur_inputs_str ])
     
     example_inputs.append(cur_inputs_int) # 
     example_outputs.append( [0.0 for x in range(10)] )
     example_outputs[0][ int(single_training_example[0]) ] = 1.0
     
-    my_network = Network(1, 784, 1, 10)
+    my_network = Network(2, 784, 1, 10)
     
     cur_model_output         = None
     cur_cost_function_result = None
     
-    num_iterations_of_backprop = 10
+    num_iterations_of_backprop = 1000
     for i in range(num_iterations_of_backprop):
         cur_model_output, cur_cost_function_result = my_network.train(example_inputs, example_outputs)
+        print("cur_model_output:         " + str(cur_model_output))
+        print("cur_cost_function_result: " + str(cur_cost_function_result))
+        print()
     
     print("Holy guac, did it work??")
-    print("cur_model_output:         " + str(cur_model_output))
-    print("cur_cost_function_result: " + str(cur_cost_function_result))
     print()
     print("simple_mnist_test_1: Done")
 

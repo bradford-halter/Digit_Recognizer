@@ -8,7 +8,7 @@ def propagation(network, input_layer):
         if i > 0:
             for j in range(len(network.hidden_layers[i].neurons)):
                 cur_neuron = network.hidden_layers[i].neurons[j]
-                cur_neuron.z = z_function(network.hidden_layers[i].neurons[j], input_layer)
+                cur_neuron.z = z_function(network.hidden_layers[i].neurons[j], network.hidden_layers[i - 1])
                 cur_neuron.alpha = sig_func(network.hidden_layers[i].neurons[j], network.hidden_layers[i - 1])
         else:
             for j in range(len(network.hidden_layers[i].neurons)):
