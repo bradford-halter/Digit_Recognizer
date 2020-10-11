@@ -68,9 +68,9 @@ def main():
         
         for i, cur_input in enumerate(test_inputs):
             cur_input_classification = my_network.classify(cur_input)
-            out_writer.writerow([i, cur_input_classification])
+            out_writer.writerow([i+1, cur_input_classification])
             
-            print(f'{i}, {cur_input_classification}')
+            print(f'{i+1}, {cur_input_classification}')
         
 
     print("Done.")
