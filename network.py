@@ -2,7 +2,8 @@
 
 from layer import Layer
 
-from propogation import *
+from propagation import *
+from entire_network_back_prop import *
 
 import jsonpickle
 import json

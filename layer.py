@@ -16,7 +16,7 @@ class Layer:
         self.biases = []
     
     # If this is an input layer, you can pass a list of floats to initialize it.
-    def from_input_list(example_input):
+    def from_input_list(self, example_input):
         if len(self.neurons) != len(example_input):
             raise ValueError()
         for cur_neuron, cur_input_float in zip(self.neurons, example_input):

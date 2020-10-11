@@ -442,7 +442,12 @@ def simple_mnist_test_1():
     
     my_network = Network(1, 784, 1, 10)
     
-    cur_model_output, cur_cost_function_result = my_network.train(example_inputs, example_outputs)
+    cur_model_output         = None
+    cur_cost_function_result = None
+    
+    num_iterations_of_backprop = 10
+    for i in range(num_iterations_of_backprop):
+        cur_model_output, cur_cost_function_result = my_network.train(example_inputs, example_outputs)
     
     print("Holy guac, did it work??")
     print("cur_model_output:         " + str(cur_model_output))
