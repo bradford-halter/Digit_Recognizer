@@ -66,8 +66,8 @@ class Network:
             cur_model_output = self.forward_prop(cur_input_layer)
             
             cur_cost_function_result = self.back_prop(cur_input_layer, cur_model_output, cur_desired_output)
-    
-            return cur_model_output, cur_cost_function_result
+        
+        return cur_cost_function_result
     
     
     

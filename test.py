@@ -445,10 +445,9 @@ def simple_mnist_test_1():
     cur_model_output         = None
     cur_cost_function_result = None
     
-    num_iterations_of_backprop = 1000
+    num_iterations_of_backprop = 10
     for i in range(num_iterations_of_backprop):
-        cur_model_output, cur_cost_function_result = my_network.train(example_inputs, example_outputs)
-        print("cur_model_output:         " + str(cur_model_output))
+        cur_cost_function_result = my_network.train(example_inputs, example_outputs)
         print("cur_cost_function_result: " + str(cur_cost_function_result))
         print()
     
@@ -456,7 +455,46 @@ def simple_mnist_test_1():
     print()
     print("simple_mnist_test_1: Done")
 
+# MNIST Test 2:
+#
+# 
+#
+def simple_mnist_test_2():
+    
+    training_examples = []
 
+    # Open the CSV file as read-only. Python will close it when the program exits.
+    with open('train_small.csv', 'r') as csvfile: 
+
+        training_data = csv.reader(csvfile)
+
+        # The first row in the training data CSV file is text, the names of each column.
+        csv_column_names = next(training_data)
+        
+        for row in training_data:
+            training_examples.append(row)
+        
+    example_inputs  = []
+    example_outputs = []
+    
+    for cur_training_example in training_examples:
+        cur_inputs_str = cur_training_example[1:]
+        cur_inputs_int = normalize([ int(x) for x in cur_inputs_str ])
+        
+        example_inputs.append(cur_inputs_int) # 
+        example_outputs.append( [0.0 for x in range(10)] )
+        example_outputs[0][ int(cur_training_example[0]) ] = 1.0
+    
+    my_network = Network(2, 784, 4, 10)
+    
+    cur_model_output         = None
+    cur_cost_function_result = None
+    
+    num_iterations_of_backprop = 10
+    for i in range(num_iterations_of_backprop):
+        cur_cost_function_result = my_network.train(example_inputs, example_outputs)
+        print("cur_cost_function_result: " + str(["{:.4f}".format(x) for x in cur_cost_function_result]))
+        print()
 
 
 def test_normalize():
@@ -488,7 +526,8 @@ def main():
     #test_back_propagation_1_layers()
     #test_matplotlib_plot()
     #test_normalize()
-    simple_mnist_test_1()
+    #simple_mnist_test_1()
+    simple_mnist_test_2()
 
 # Call the main() function when the program is started from command line.
 if __name__ == "__main__":
