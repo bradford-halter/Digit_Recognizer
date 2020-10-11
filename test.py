@@ -417,8 +417,32 @@ def test_back_propagation_1_layers():
 #            Print out current value of cost function.
 #
 def simple_mnist_test_1():
-    pass
+    
+    single_training_example = None
 
+    # Open the CSV file as read-only. Python will close it when the program exits.
+    with open('train_small.csv', 'r') as csvfile: 
+
+        training_data = csv.reader(csvfile)
+
+        # The first row in the training data CSV file is text, the names of each column.
+        csv_column_names = next(training_data)
+        
+        single_training_example = next(training_data)
+        
+    example_inputs  = []
+    example_outputs = []
+    
+    cur_inputs_str = single_training_example[2:]
+    cur_inputs_int = normalize([ int(x) for x in cur_inputs_str ])
+    
+    example_inputs.append(cur_inputs_int) # 
+    example_outputs.append( [0.0 for x in range(10)] )
+    example_outputs[0][ int(single_training_example[0]) ] = 1.0
+    
+    my_network = Network(1, 784, 1, 10)
+    
+    my_network.train(example_inputs, example_outputs)
 
 
 
@@ -449,9 +473,10 @@ def main():
     #test_cross_prod_1()
     #test_forward_propagation_1_layers()
     #test_cost_function_1_layers()
-    test_back_propagation_1_layers()
+    #test_back_propagation_1_layers()
     #test_matplotlib_plot()
     #test_normalize()
+    simple_mnist_test_1()
 
 # Call the main() function when the program is started from command line.
 if __name__ == "__main__":

@@ -7,6 +7,7 @@ import json
 
 class Network:
     
+    # Terminology: 1 hidden layer means there's only an output layer.
     def __init__(self, num_hidden_layers, num_test_feat, num_neurons_per_layer, num_possible_outputs):
         if num_hidden_layers > 1:
             self.hidden_layers = []
@@ -35,12 +36,16 @@ class Network:
 #       
 #   Network.train() is for 1 iteration of forward prop, calculating cost, and then back prop.
 #
-#   Do forward propagation.
-#   Store the output of forward prop.         
-#   Call entire_network_back_prop().
-    def train(example_inputs, example_outputs):
-        pass
-    
+# pseudocode:
+#   for each pair of input/output example:
+#       As needed, create Layer classes to hold the input_layer for each example input.
+#       Do forward propagation.
+#       Store the output of forward prop.         
+#       Call entire_network_back_prop().
+    def train(self, example_inputs, example_outputs):
+        for cur_input, cur_output in zip(example_inputs, example_outputs):
+            print(cur_input, cur_output)
+            
     
     
     

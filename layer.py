@@ -14,6 +14,11 @@ class Layer:
         self.weights = []
         self.alphas = []
         self.biases = []
+    
+    # If this is an input
+    def from_outputs(example_output):
+        pass
+        
     # y: For the very last layer (the output layer) in the network,
     #    y is the provided labelled data.
     def backpropogate(self, previous_layer, y):
