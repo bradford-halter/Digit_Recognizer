@@ -515,12 +515,9 @@ def test_matplotlib_plot():
     print("Booyah it printed.")
 
 def test_jsonpickle_1():
-    print("test_jsonpickle_1: Start")
+    #my_network = simple_mnist_test_2()
     my_network = Network(2, 784, 4, 10)
-    print("my_network:")
-    print(my_network)
-    print()
-    frozen = jsonpickle.encode(my_network, keys=True, warn=True)
+    frozen = jsonpickle.encode(my_network)
     with open('test_jsonpickle_1.json', 'w') as picklejar:
         picklejar.write(frozen)
     print("Put the pickle in the jar.")
@@ -528,9 +525,7 @@ def test_jsonpickle_1():
     with open('test_jsonpickle_1.json', 'r') as unpicklejar:
         unpicklednetwork = jsonpickle.decode(unpicklejar.read())
     print(type(unpicklednetwork))
-    print("unpicklednetwork")
-    print(unpicklednetwork)
-    print("test_jsonpickle_1: End")
+    #print(unpicklednetwork)
 
 def test_max_index_of_list():
     print("test_max_index_of_list: Start")
@@ -546,6 +541,58 @@ def test_max_index_of_list():
         print()
     print("test_max_index_of_list: End")
 
+def test_classify_test_set():
+    print("test_classify_test_set: Start")
+    
+    random.seed(0)
+    
+    testing_examples = []
+
+    # Open the CSV file as read-only. Python will close it when the program exits.
+    with open('train_small.csv', 'r') as csvfile: 
+
+        testing_data = csv.reader(csvfile)
+
+        # The first row in the testing data CSV file is text, the names of each column.
+        csv_column_names = next(testing_data)
+        
+        for row in testing_data:
+            testing_examples.append(row)
+        
+    test_inputs  = []
+    
+    for cur_testing_example in testing_examples:
+        cur_inputs_str = cur_testing_example
+        cur_inputs_int = normalize([ int(x) for x in cur_inputs_str ])
+        test_inputs.append(cur_inputs_int) 
+    
+    #--------------------------------------------
+    # Load the model
+    #--------------------------------------------
+    
+    my_network = None
+    with open('model.json', 'r') as unpicklejar:
+        my_network = jsonpickle.decode(unpicklejar.read())
+    if my_network == None:
+        raise Exception("model.json was not loaded.")
+    
+    #--------------------------------------------
+    # Get each classification from model and save.
+    #--------------------------------------------
+    
+    # Open the CSV file to write classifications
+    with open('test_set_classifications.csv', mode='w', newline='') as test_set_classifications_file:
+        out_writer = csv.writer(test_set_classifications_file, delimiter=',', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+        
+        for i, cur_input in enumerate(test_inputs):
+            cur_input_classification = my_network.classify(cur_input)
+            out_writer.writerow([i+1, cur_input_classification])
+            
+            print(f'{i+1}, {cur_input_classification}')
+        
+
+    print("Done.")
+    
 def main():
     # Set the random seed to 0 so tests will be repeatable.
     random.seed(0)
@@ -561,8 +608,9 @@ def main():
     #test_normalize()
     #simple_mnist_test_1()
     #simple_mnist_test_2()
-    test_jsonpickle_1()
+    #test_jsonpickle_1()
     #test_max_index_of_list()
+    test_classify_test_set()
 
 # Call the main() function when the program is started from command line.
 if __name__ == "__main__":
