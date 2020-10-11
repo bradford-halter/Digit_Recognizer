@@ -58,7 +58,7 @@ def main():
         cur_cost_function_result = my_network.train(
                                                  example_inputs[cur_example_num : cur_example_num + step_size], 
                                                 example_outputs[cur_example_num : cur_example_num + step_size])
-        print("cur_cost_function_result: " + str(["{:.4f}".format(x) for x in cur_cost_function_result]))
+        print("cur_cost_function_result: " + str([cur_cost_function_result]))
         print()
         
         # Save the model to JSON format where it can be restored later.
