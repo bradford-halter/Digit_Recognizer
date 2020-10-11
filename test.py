@@ -421,7 +421,7 @@ def simple_mnist_test_1():
     single_training_example = None
 
     # Open the CSV file as read-only. Python will close it when the program exits.
-    with open('train_small.csv', 'r') as csvfile: 
+    with open('train_small_2.csv', 'r') as csvfile: 
 
         training_data = csv.reader(csvfile)
 
