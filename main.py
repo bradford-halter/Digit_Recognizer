@@ -2,11 +2,23 @@
 
 # Python 3.6
 
-from network import Network
-from neuron import Neuron
-from layer import Layer
 
+from network import Network
+from layer import Layer
+from neuron import Neuron
+
+from sig_func import *
+from cost_func import *
+from propagation import *
+from back_propagation import *
+from entire_network_back_prop import *
+
+import math
+import csv
+import random
 import jsonpickle
+#import matplotlib
+import matplotlib.pyplot as plt
  
 def main():
     # Set the random seed to 0, so that tests of the code will be repeatable.
@@ -55,6 +67,8 @@ def main():
             jsonpickle_savefile.write(model_as_json)
         
         cur_example_num += 20 
+            
+        print("Finished training on examples through : #" + str(cur_example_num))
             
     # Exit the program.
     print("Done.")
