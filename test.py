@@ -297,7 +297,7 @@ def test_back_propagation_1_layers():
     # Put in some examples where each example has the same output as input.
     # Train the neural network. The single weight should end up near 1 (?) and the bias near 0.
     # If the neural network ends up outputting a function like f(x) = x, then we're good.
-    single_weight_and_bias = Network(1, 1, 1, 1)
+    single_weight_and_bias = Network(3, 1, 784, 1)
     examples = [(x, x) for x in range(-10, 11)] # -10 to 10 (inclusive).
     
     # Set up an input layer for each example.
