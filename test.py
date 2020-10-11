@@ -8,7 +8,7 @@ from sig_func import *
 from cost_func import *
 from propagation import *
 from back_propagation import *
-
+from entire_network_back_prop import *
 
 import math
 import csv
@@ -297,7 +297,7 @@ def test_back_propagation_1_layers():
     # Put in some examples where each example has the same output as input.
     # Train the neural network. The single weight should end up near 1 (?) and the bias near 0.
     # If the neural network ends up outputting a function like f(x) = x, then we're good.
-    single_weight_and_bias = Network(2, 1, 2, 1)
+    single_weight_and_bias = Network(1, 1, 1, 1)
     examples = [(x, x) for x in range(-10, 11)] # -10 to 10 (inclusive).
     
     # Set up an input layer for each example.
@@ -322,12 +322,12 @@ def test_back_propagation_1_layers():
     
     costs_per_evaluation = []
     outputs_of_network_per_evaluation = []
-
+    
     
     # Run back propagation once for each (input, expected_output) example.
     # We're not batching. Each time we call back_propagation(), 
     # it's doing backprop using 1 training example.
-    for cur_num_evaluation in range(1):
+    for cur_num_evaluation in range(10):
     
         # Evaluate the network on the input, and get the outputs and costs.
         outputs_of_network, ret_val_norm_array =  \
@@ -340,9 +340,12 @@ def test_back_propagation_1_layers():
     
         # Do backprop across all (input, output) examples 1 time.
         for i in range(len(examples_as_input_layers)):
-            new_costs = back_propagation(single_weight_and_bias.hidden_layers[0], 
-                             examples_as_input_layers[i], 
-                             costs_per_evaluation[cur_num_evaluation][i])
+            cur_desired_output = [expected_outputs_of_network[i]] # The expected output for this 1 input example. Included within an array if it is a scalar value.
+            cur_model_output = [outputs_of_network_per_evaluation[cur_num_evaluation][i]]
+            entire_network_back_prop(single_weight_and_bias, examples_as_input_layers[i], cur_model_output, cur_desired_output)
+            #new_costs = back_propagation(single_weight_and_bias.hidden_layers[0], 
+            #                             examples_as_input_layers[i], 
+            #                             costs_per_evaluation[cur_num_evaluation][i])
         # TODO: there is a bug w/ list index out of range. Handle it using the new_costs variable, somehow.
     
     #--------------------------------------------
