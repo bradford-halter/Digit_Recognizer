@@ -26,4 +26,24 @@ class Network:
     def __str__(self):
         return json.dumps(json.loads(jsonpickle.encode(self.__dict__, unpicklable=False)), indent=4, sort_keys=True)
         
-        
+#
+#   example_inputs:  inputs from the training data. 
+#       This is a list of lists, where each inner list contains 1 value for each feature in 1st layer of the network.
+#       The value of each input is in range [0.0, 1.0].
+#   example_outputs: outputs from the training data. The dimension of this list must match that of example_inputs.
+#       The value of each output is in range [0.0, 1.0].
+#       
+#   Network.train() is for 1 iteration of forward prop, calculating cost, and then back prop.
+#
+#   Do forward propagation.
+#   Store the output of forward prop.         
+#   Call entire_network_back_prop().
+    def train(example_inputs, example_outputs):
+        pass
+    
+    
+    
+    
+    
+    
+    

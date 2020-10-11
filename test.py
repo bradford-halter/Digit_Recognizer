@@ -297,7 +297,7 @@ def test_back_propagation_1_layers():
     # Put in some examples where each example has the same output as input.
     # Train the neural network. The single weight should end up near 1 (?) and the bias near 0.
     # If the neural network ends up outputting a function like f(x) = x, then we're good.
-    single_weight_and_bias = Network(3, 1, 784, 1)
+    single_weight_and_bias = Network(2, 1, 16, 1)
     examples = [(x, x) for x in range(-10, 11)] # -10 to 10 (inclusive).
     
     # Set up an input layer for each example.
@@ -327,7 +327,7 @@ def test_back_propagation_1_layers():
     # Run back propagation once for each (input, expected_output) example.
     # We're not batching. Each time we call back_propagation(), 
     # it's doing backprop using 1 training example.
-    for cur_num_evaluation in range(10):
+    for cur_num_evaluation in range(3):
     
         # Evaluate the network on the input, and get the outputs and costs.
         outputs_of_network, ret_val_norm_array =  \
@@ -380,6 +380,48 @@ def test_back_propagation_1_layers():
 
     
     print("Done.")
+
+# Simplest MNIST Test 1:
+#
+#784 inputs.
+#10 outputs.
+#doesnt matter how many neurons per layer
+#1 hidden layer.
+#
+#    In this test there will be 10 outputs, each with 784 weights, + 1 for the bias.
+#    
+#Train with ONLY 1 example, and expect classification to work for only that 1 example.
+#    e.g. do backprop with an image of a 1, and the output classification 1. And then train the network to get that right.
+#
+# Pseudocode:
+#Open the CSV and read in 1 example.
+#    The 2nd row of the CSV file.
+#    
+#Set up 1 input layer with 784 values in the layer.
+#
+#Create MNIST outputs
+#    Set up an array of 10 outputs containing floats in [0.0, 1.0].
+#        The value at index 1 should be 1.0, all else 0.0.
+#        
+#        
+#In a loop: (For some num iterations)
+#    Print the iteration num.
+#    # Network.train() is for 1 iteration
+#    cur_forward_prop_result, cur_cost_function_result = Network.train(example_inputs, example_outputs) 
+#    train():
+#        Do forward propagation.
+#        Store the output of forward prop.
+#            
+#        Call entire_network_back_prop().
+#            Print out the forward prop results.
+#            Print out current value of cost function.
+#
+def simple_mnist_test_1():
+    pass
+
+
+
+
 
 def test_normalize():
     print("test_normalize()")
