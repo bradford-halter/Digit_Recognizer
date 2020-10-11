@@ -523,8 +523,23 @@ def test_jsonpickle_1():
     print("Put the pickle in the jar.")
     unpicklednetwork = None
     with open('test_jsonpickle_1.json', 'r') as unpicklejar:
-        unpicklednetwork = jsonpickle.encode(unpicklejar.read())
+        unpicklednetwork = jsonpickle.decode(unpicklejar.read())
+    print(type(unpicklednetwork))
     #print(unpicklednetwork)
+
+def test_max_index_of_list():
+    print("test_max_index_of_list: Start")
+    for i in range(10):
+        a = [random.random() for x in range(10)]
+
+        # Find the index in the output that has the highest value
+        val, idx = max((val, idx) for (idx, val) in enumerate(a))
+        
+        print(str(["{:.4f}".format(x) for x in a]))
+        print(f'val: {val}')
+        print(f'idx: {idx}')
+        print()
+    print("test_max_index_of_list: End")
 
 def main():
     # Set the random seed to 0 so tests will be repeatable.
@@ -541,7 +556,8 @@ def main():
     #test_normalize()
     #simple_mnist_test_1()
     #simple_mnist_test_2()
-    test_jsonpickle_1()
+    #test_jsonpickle_1()
+    #test_max_index_of_list()
 
 # Call the main() function when the program is started from command line.
 if __name__ == "__main__":

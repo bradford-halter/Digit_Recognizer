@@ -36,6 +36,24 @@ class Network(object):
         model_output = propagation(self, input_layer)
         return model_output
         
+    # Just like forward_prop, but the input/output are cleaned up
+    # It takes in the a single input as a time, but as a list, not an input layer.
+    # It outputs just the classification, not the model output.
+    def classify(self, single_input_as_list):
+        cur_input = single_input_as_list
+        # Make the input layer
+        cur_input_layer = Layer(len(cur_input), 0)
+        cur_input_layer.from_input_list(cur_input)
+
+        # Do forward propagation.
+        # Returns a list of floats
+        cur_model_output = self.forward_prop(cur_input_layer)
+        
+        # Find the index in the output that has the highest value
+        val, idx = max((val, idx) for (idx, val) in enumerate(cur_model_output))
+        
+        return idx
+        
     # Returns the output of the cost function from BEFORE backprop was performed.
     def back_prop(self, input_layer, cur_model_output, cur_desired_output):
         return entire_network_back_prop(self, input_layer, cur_model_output, cur_desired_output)
