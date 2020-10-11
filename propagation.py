@@ -3,7 +3,6 @@
 from sig_func import *
 
 def propagation(network, input_layer):
-    network.last_input_layer_used = input_layer # store a copy of the input layer, to be printed out layer
     for i in range(len(network.hidden_layers)):
         if i > 0:
             for j in range(len(network.hidden_layers[i].neurons)):

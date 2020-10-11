@@ -19,6 +19,7 @@ import random
 import jsonpickle
 #import matplotlib
 import matplotlib.pyplot as plt
+import json
  
 def main():
     # Set the random seed to 0, so that tests of the code will be repeatable.
@@ -62,7 +63,9 @@ def main():
         print()
         
         # Save the model to JSON format where it can be restored later.
-        model_as_json = jsonpickle.encode(my_network)
+        model_as_json = jsonpickle.encode(my_network, keys=True, warn=True)
+        # Pretty-print JSON before saving
+        model_as_json = json.dumps(json.loads(model_as_json), indent=4)
         with open('model.json', 'w') as jsonpickle_savefile:
             jsonpickle_savefile.write(model_as_json)
         

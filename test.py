@@ -515,9 +515,12 @@ def test_matplotlib_plot():
     print("Booyah it printed.")
 
 def test_jsonpickle_1():
-    #my_network = simple_mnist_test_2()
+    print("test_jsonpickle_1: Start")
     my_network = Network(2, 784, 4, 10)
-    frozen = jsonpickle.encode(my_network)
+    print("my_network:")
+    print(my_network)
+    print()
+    frozen = jsonpickle.encode(my_network, keys=True, warn=True)
     with open('test_jsonpickle_1.json', 'w') as picklejar:
         picklejar.write(frozen)
     print("Put the pickle in the jar.")
@@ -525,7 +528,9 @@ def test_jsonpickle_1():
     with open('test_jsonpickle_1.json', 'r') as unpicklejar:
         unpicklednetwork = jsonpickle.decode(unpicklejar.read())
     print(type(unpicklednetwork))
-    #print(unpicklednetwork)
+    print("unpicklednetwork")
+    print(unpicklednetwork)
+    print("test_jsonpickle_1: End")
 
 def test_max_index_of_list():
     print("test_max_index_of_list: Start")
@@ -556,7 +561,7 @@ def main():
     #test_normalize()
     #simple_mnist_test_1()
     #simple_mnist_test_2()
-    #test_jsonpickle_1()
+    test_jsonpickle_1()
     #test_max_index_of_list()
 
 # Call the main() function when the program is started from command line.
