@@ -42,7 +42,7 @@ def main():
     
     cur_example_num = 0
     step_size = 20 # number of examples to train on in between saves.
-    while cur_example_num + step_size < len(training_examples) - 1
+    while cur_example_num + step_size < len(training_examples) - 1:
         cur_cost_function_result = my_network.train(
                                                  example_inputs[cur_example_num : cur_example_num + step_size], 
                                                 example_outputs[cur_example_num : cur_example_num + step_size])
