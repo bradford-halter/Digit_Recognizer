@@ -2,6 +2,8 @@
 
 from layer import Layer
 
+from propogation import *
+
 import jsonpickle
 import json
 
@@ -26,6 +28,16 @@ class Network:
         
     def __str__(self):
         return json.dumps(json.loads(jsonpickle.encode(self.__dict__, unpicklable=False)), indent=4, sort_keys=True)
+    
+    # Same as we have defined in propogation.py
+    # Returns a list of floats
+    def forward_prop(self, input_layer):
+        model_output = propagation(self, input_layer)
+        return model_output
+        
+    # Returns the output of the cost function from BEFORE backprop was performed.
+    def back_prop(self, input_layer, cur_model_output, cur_desired_output):
+        return entire_network_back_prop(self, input_layer, cur_model_output, cur_desired_output)
         
 #
 #   example_inputs:  inputs from the training data. 
@@ -41,14 +53,20 @@ class Network:
 #       As needed, create Layer classes to hold the input_layer for each example input.
 #       Do forward propagation.
 #       Store the output of forward prop.         
-#       Call entire_network_back_prop().
+#       Call backprop().
     def train(self, example_inputs, example_outputs):
-        for cur_input, cur_output in zip(example_inputs, example_outputs):
-            print(cur_input, cur_output)
+        for cur_input, cur_desired_output in zip(example_inputs, example_outputs):
+            # Make the input layer
+            cur_input_layer = Layer(len(cur_input), 0)
+            cur_input_layer.from_input_list(cur_input)
             
+            # Do forward propagation.
+            # Returns a list of floats
+            cur_model_output = self.forward_prop(cur_input_layer)
+            
+            cur_cost_function_result = self.back_prop(cur_input_layer, cur_model_output, cur_desired_output)
     
-    
-    
+            return cur_model_output, cur_cost_function_result
     
     
     

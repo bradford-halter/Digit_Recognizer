@@ -4,12 +4,12 @@ from back_propagation import *
 from cost_func import *
 
 # 
-# input_layer:  input for a single example
-# desired_mat: output for a single example
+# input_layer:         input for a single example
+# cur_desired_output: output for a single example
 #
-def entire_network_back_prop(network, input_layer, cur_model_output, desired_mat): # cur_model_output is the current model outputs
+def entire_network_back_prop(network, input_layer, cur_model_output, cur_desired_output): # cur_model_output is the current model outputs
     print("entire_network_back_prop: Begin")
-    cost_ini = cost_func(cur_model_output, desired_mat)[2]
+    cost_ini = cost_func(cur_model_output, cur_desired_output)[2]
     print("entire_network_back_prop: finished calling cost_func()")
     new_cost = []
     
@@ -27,3 +27,4 @@ def entire_network_back_prop(network, input_layer, cur_model_output, desired_mat
                 new_cost = back_propagation(network.hidden_layers[len(network.hidden_layers) - (i + 1)], network.hidden_layers[len(network.hidden_layers) - (i + 2)], new_cost)
 
     print("entire_network_back_prop: Done")
+    return cost_ini

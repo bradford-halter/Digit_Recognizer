@@ -15,11 +15,14 @@ class Layer:
         self.alphas = []
         self.biases = []
     
-    # If this is an input
-    def from_outputs(example_output):
-        pass
+    # If this is an input layer, you can pass a list of floats to initialize it.
+    def from_input_list(example_input):
+        if len(self.neurons) != len(example_input):
+            raise ValueError()
+        for cur_neuron, cur_input_float in zip(self.neurons, example_input):
+            cur_neuron.alpha = cur_input_float
         
-    # y: For the very last layer (the output layer) in the network,
+    # y: For the very last layer (the output layer) in the network,n
     #    y is the provided labelled data.
     def backpropogate(self, previous_layer, y):
         refresh_alpha_list()

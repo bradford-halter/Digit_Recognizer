@@ -442,7 +442,13 @@ def simple_mnist_test_1():
     
     my_network = Network(1, 784, 1, 10)
     
-    my_network.train(example_inputs, example_outputs)
+    cur_model_output, cur_cost_function_result = my_network.train(example_inputs, example_outputs)
+    
+    print("Holy guac, did it work??")
+    print("cur_model_output:         " + str(cur_model_output))
+    print("cur_cost_function_result: " + str(cur_cost_function_result))
+    print()
+    print("simple_mnist_test_1: Done")
 
 
 
