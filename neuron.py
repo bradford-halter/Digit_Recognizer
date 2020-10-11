@@ -7,7 +7,7 @@
 import random
 import jsonpickle
 
-class Neuron:
+class Neuron(object):
     def __init__(self, num_weights):
         self.z = None
         self.alpha = random.random()

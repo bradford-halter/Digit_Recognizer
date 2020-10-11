@@ -490,12 +490,13 @@ def simple_mnist_test_2():
     cur_model_output         = None
     cur_cost_function_result = None
     
-    num_iterations_of_backprop = 10
+    num_iterations_of_backprop = 1
     for i in range(num_iterations_of_backprop):
         cur_cost_function_result = my_network.train(example_inputs, example_outputs)
         print("cur_cost_function_result: " + str(["{:.4f}".format(x) for x in cur_cost_function_result]))
         print()
 
+    return my_network
 
 def test_normalize():
     print("test_normalize()")
@@ -513,6 +514,18 @@ def test_matplotlib_plot():
     plt.show()
     print("Booyah it printed.")
 
+def test_jsonpickle_1():
+    #my_network = simple_mnist_test_2()
+    my_network = Network(2, 784, 4, 10)
+    frozen = jsonpickle.encode(my_network)
+    with open('test_jsonpickle_1.json', 'w') as picklejar:
+        picklejar.write(frozen)
+    print("Put the pickle in the jar.")
+    unpicklednetwork = None
+    with open('test_jsonpickle_1.json', 'r') as unpicklejar:
+        unpicklednetwork = jsonpickle.encode(unpicklejar.read())
+    #print(unpicklednetwork)
+
 def main():
     # Set the random seed to 0 so tests will be repeatable.
     random.seed(0)
@@ -527,7 +540,8 @@ def main():
     #test_matplotlib_plot()
     #test_normalize()
     #simple_mnist_test_1()
-    simple_mnist_test_2()
+    #simple_mnist_test_2()
+    test_jsonpickle_1()
 
 # Call the main() function when the program is started from command line.
 if __name__ == "__main__":

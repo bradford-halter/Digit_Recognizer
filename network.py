@@ -8,7 +8,7 @@ from entire_network_back_prop import *
 import jsonpickle
 import json
 
-class Network:
+class Network(object):
     
     # Terminology: 1 hidden layer means there's only an output layer.
     def __init__(self, num_hidden_layers, num_test_feat, num_neurons_per_layer, num_possible_outputs):

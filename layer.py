@@ -4,7 +4,7 @@ from neuron import Neuron
 
 import jsonpickle
 
-class Layer:
+class Layer(object):
     def __init__(self, num_neurons, num_neurons_prev_layer):
         
         self.neurons = []
