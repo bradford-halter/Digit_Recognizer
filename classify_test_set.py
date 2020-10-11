@@ -45,7 +45,7 @@ def main():
     
     for cur_testing_example in testing_examples:
         cur_inputs_str = cur_testing_example
-        cur_inputs_int = normalize([ int(x) for x in cur_inputs_str ])
+        cur_inputs_int = normalize([ float(x) for x in cur_inputs_str ])
         test_inputs.append(cur_inputs_int) 
     
     #--------------------------------------------
